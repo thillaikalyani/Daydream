@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>daydream.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <aside class="sidebar">
+            <h1 class="sidebar-logo">daydream.</h1>
+            <p class="sidebar-tagline">make today lovely ♡</p>
+
+            <nav class="sidebar-nav">
+                <button class="nav-link active" onclick="showPage('home', this)">⌂ Home</button>
+                <button class="nav-link" onclick="showPage('academics', this)">✧ Academics</button>
+                <button class="nav-link" onclick="showPage('study', this)">♡ Study room</button>
+                <button class="nav-link" onclick="showPage('planner', this)">▤ Planner</button>
+                <button class="nav-link" onclick="showPage('memories', this)">▧ Memories</button>
+                <button class="nav-link" onclick="showPage('progress', this)">✿ Progress</button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="page active" id="home">
+
+                <header>
+                    <h1>daydream.</h1>
+                    <p>make today a little lovely ♡</p>
+                </header>
+
+                <main>
+
+                    <section class="welcome">
+                        <h2>your little corner of the world.</h2>
+                        <p>one day at a time, one dream at a time.</p>
+                    </section>
+
+                    <section class="stats">
+
+                        <div class="card">
+                            <h3>study this week</h3>
+
+                            <p id="study-total">0 / 20 hours</p>
+
+                            <div class="progress-bar">
+                                <div id="study-progress"></div>
+                            </div>
+
+                            <input type="number" id="study-input" placeholder="Hours studied" min="0.1" max="20"
+                                step="0.1">
+                            <button onclick="addStudyHours()">Add hours</button>
+                        </div>
+
+                        <div class="card">
+                            <h3>steps today</h3>
+                            <p>0 steps</p>
+                        </div>
+
+
+                    </section>
+            </div>
+            <div class="page" id="memories">
+
+                <section class="daily-photo">
+                    <h2>a picture a day</h2>
+                    <p>little moments worth remembering ♡</p>
+                    <div class="photo-upload">
+                        <input type="file" id="photo-input" accept="image/*" multiple>
+                        <input type="text" id="photo-caption" placeholder="Add a little caption...">
+                        <input type="date" id="photo-date">
+                        <button onclick="addPhotos()">
+                            Add to my memories ♡
+                        </button>
+                        your daily memory goes here ♡
+                    </div>
+                    <div id="photo-gallery" class="photo-gallery"></div>
+                </section>
+            </div>
+            <div class="page" id="academics">
+                <section class="academics">
+
+                    <h2>my academics ♡</h2>
+                    <p>a little plan for every day.</p>
+                    <div class="day-selector">
+                        <button onclick="showDay('Monday')">Mon</button>
+                        <button onclick="showDay('Tuesday')">Tue</button>
+                        <button onclick="showDay('Wednesday')">Wed</button>
+                        <button onclick="showDay('Thursday')">Thu</button>
+                        <button onclick="showDay('Friday')">Fri</button>
+                        <button onclick="showDay('Saturday')">Sat</button>
+                        <button onclick="showDay('Sunday')">Sun</button>
+                    </div>
+                    <div id="schedule-list">
+                        Select a day to view your classes ♡
+                    </div>
+                </section>
+            </div>
+            <div class="page" id="study">
+                <section class="study-diary">
+
+                    <h2>my study diary ♡</h2>
+                    <p>a little progress every day.</p>
+
+                    <div class="study-tabs">
+                        <button onclick="showStudyMode('timer')">study timer</button>
+                        <button onclick="showStudyMode('manual')">manual entry</button>
+                    </div>
+
+                    <div id="timer-section">
+
+                        <select id="timer-subject">
+                            <option value="">Choose a subject</option>
+                            <option>Computation Structures</option>
+                            <option>OOPS</option>
+                            <option>Chemistry</option>
+                            <option>Probability and Statistics</option>
+                            <option>Macroeconomics</option>
+                            <option>Fashion Psychology</option>
+                            <option>Spanish</option>
+                            <option>MATLAB</option>
+                        </select>
+
+                        <h2 id="timer-display">00:00:00</h2>
+
+                        <button onclick="startTimer()">Start</button>
+                        <button onclick="pauseTimer()">Pause</button>
+                        <button onclick="finishTimer()">Finish session</button>
+
+                    </div>
+
+                    <div id="manual-section" style="display:none;">
+
+                        <select id="manual-subject">
+                            <option value="">Choose a subject</option>
+                            <option>Computation Structures</option>
+                            <option>OOPS</option>
+                            <option>Chemistry</option>
+                            <option>Probability and Statistics</option>
+                            <option>Macroeconomics</option>
+                            <option>Fashion Psychology</option>
+                            <option>Spanish</option>
+                            <option>MATLAB</option>
+                        </select>
+
+                        <input type="number" id="manual-hours" placeholder="Hours studied" min="0.01" step="0.01">
+
+                        <input type="text" id="study-note" placeholder="What did you study today?">
+
+                        <button onclick="addManualSession()">
+                            Save session ♡
+                        </button>
+
+                    </div>
+
+                    <div class="study-history">
+                        <h3>recent sessions</h3>
+                        <div id="study-history-list">
+                            Your study journey starts here ♡
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+
+            <div class="page" id="progress">
+                <section class="subject-analytics">
+
+                    <h2>where my hours go ♡</h2>
+                    <p>a little look at my learning journey.</p>
+
+                    <div class="analytics-summary">
+                        <div>
+                            <small>total subjects</small>
+                            <h3 id="subject-count">0</h3>
+                        </div>
+
+                        <div>
+                            <small>most studied</small>
+                            <h3 id="top-subject">—</h3>
+                        </div>
+                    </div>
+
+                    <div id="subject-breakdown"></div>
+
+                </section>
+            </div>
+            <!-- MY PLANNER ♡ -->
+            <div class="page" id="planner">
+                <section class="planner">
+
+                    <h2>my little planner ♡</h2>
+                    <p>make room for everything that matters.</p>
+
+                    <div class="planner-date">
+                        <label for="task-date">choose your day</label>
+                        <input type="date" id="task-date">
+                    </div>
+
+                    <div class="task-entry">
+
+                        <input type="text" id="task-name" placeholder="What needs to get done?">
+
+                        <select id="task-priority">
+                            <option value="low">Low priority</option>
+                            <option value="medium" selected>Medium priority</option>
+                            <option value="high">High priority</option>
+                        </select>
+
+                        <select id="task-category">
+                            <option value="Personal">Personal</option>
+                            <option value="Academic">Academic</option>
+                            <option value="Assignment">Assignment</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+                        <button onclick="addTask()">Add to my list ♡</button>
+
+                    </div>
+
+                    <div class="daily-tasks">
+                        <h3>today's little goals</h3>
+                        <div id="task-list"></div>
+                    </div>
+
+                    <div class="weekly-planner">
+                        <h3>my week at a glance</h3>
+                        <div id="weekly-task-list"></div>
+                    </div>
+
+                </section>
+            </div>
+
+            <!-- MY CALENDAR ♡ -->
+
+            <section class="calendar-section">
+
+                <h2>the calendar ♡</h2>
+                <p>a little overview of what's ahead.</p>
+
+                <div class="calendar-header">
+
+                    <button onclick="changeMonth(-1)">←</button>
+
+                    <h3 id="calendar-month">November 2026</h3>
+
+                    <button onclick="changeMonth(1)">→</button>
+
+                </div>
+
+                <div class="calendar-grid" id="calendar-grid"></div>
+
+                <div class="calendar-details">
+
+                    <h3 id="selected-date-title">select a date ♡</h3>
+
+                    <div id="calendar-tasks">
+                        Your plans will appear here.
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- DEADLINE TRACKER ♡ -->
+
+            <section class="deadline-section">
+
+                <h2>the important dates ♡</h2>
+                <p>everything, right on schedule.</p>
+
+                <div class="deadline-form">
+
+                    <input type="text" id="deadline-title" placeholder="Exam or assignment name">
+
+                    <select id="deadline-subject">
+                        <option value="">Choose subject</option>
+                        <option>Computation Structures</option>
+                        <option>OOPS</option>
+                        <option>Chemistry</option>
+                        <option>Probability and Statistics</option>
+                        <option>Macroeconomics</option>
+                        <option>Fashion Psychology</option>
+                        <option>Spanish</option>
+                        <option>MATLAB</option>
+                    </select>
+
+                    <select id="deadline-type">
+                        <option value="Exam">Exam</option>
+                        <option value="Assignment">Assignment</option>
+                        <option value="Quiz">Quiz</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <input type="date" id="deadline-date">
+
+                    <select id="deadline-priority">
+                        <option value="High">High priority</option>
+                        <option value="Medium" selected>Medium priority</option>
+                        <option value="Low">Low priority</option>
+                    </select>
+
+                    <button onclick="addDeadline()">
+                        Add deadline ♡
+                    </button>
+
+                </div>
+
+                <div class="deadline-list">
+                    <h3>coming up</h3>
+                    <div id="upcoming-deadlines"></div>
+                </div>
+
+                <div class="completed-deadlines">
+                    <h3>completed ♡</h3>
+                    <div id="completed-deadlines"></div>
+                </div>
+
+            </section>
+            <!-- REMINDERS ♡ -->
+
+            <section class="reminders-section">
+                <h2>a little reminder ♡</h2>
+                <p>don't let the important things slip away.</p>
+
+                <div id="reminder-list"></div>
+            </section>
+            <!-- DAILY HABITS ♡ -->
+
+            <section class="habits-section">
+                <h2>little habits, big progress ♡</h2>
+                <p>small promises to yourself, every day.</p>
+
+                <div class="habit-form">
+                    <input type="text" id="habit-name" placeholder="Add a little habit...">
+                    <button onclick="addHabit()">Add habit +</button>
+                </div>
+
+                <div class="habit-progress">
+                    <p id="habit-progress-text">0 of 0 habits completed</p>
+                    <div class="habit-progress-bar">
+                        <div id="habit-progress-fill"></div>
+                    </div>
+                </div>
+
+                <div id="habit-list"></div>
+            </section>
+
+        </main>
+
+        <script src="script.js"></script>
+    </div>
+    </main>
+    </div>
+</body>
+
+</html>
